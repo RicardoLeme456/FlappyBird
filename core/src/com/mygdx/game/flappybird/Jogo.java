@@ -39,7 +39,7 @@ public class Jogo extends ApplicationAdapter {
 	@Override
 	public void render () {
 
-		batch.begin(); //Inici do processo
+		batch.begin(); //Inicio do processo
 
 		if(variacao > 3) //Se aa imagens do sprites ultrapassar de três, faz alguma coisa
 			variacao = 0; //A imagem for maior que 3 retorna para zero
@@ -59,7 +59,7 @@ public class Jogo extends ApplicationAdapter {
 			gravidade++; //Adiciona gravidade
 			movimentaX++; //Adiciona Movimentação do eixo x
 			movimentaY++; //Adiciona Movimentação do eixo y
-			batch.end();
+			batch.end(); //Fim do processo
 		}
 
     @Override
