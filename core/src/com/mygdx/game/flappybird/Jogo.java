@@ -7,43 +7,64 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Jogo extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture passaro;
-	Texture fundo;
 
-	private float larguraDispositivo;
-	private float alturaDispositivo;
+	private int movimentaY = 0; //Movimento do eixo Y
+	private int movimentaX = 0; //Movimento do eixo X
+	private SpriteBatch batch; //Quantidades de sprites que vai ser criado
+	private Texture[] passaros; //As imagens dos sprites
+	private Texture fundo; //A imagem de fundo
 
-	private int movimentaY = 0;
-	private int movimentaX = 0;
+	private float larguraDispositivo; //Largura do Pano de Fundo
+	private float alturaDispositivo; //Altura do Pano de Fundo
+	private float variacao = 0; //Variação das imagens do passaro para gerar o movimento das asa
+	private float gravidade = 0; //Gravidade do paasaro conforme se movimenta
+	private float posicaoInicialVerticalPassaro = 0; //Posição inicial vai se iniciar no zero
+
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		fundo = new Texture("fundo.png");
-		passaro = new Texture("passaro1.png");
+		batch = new SpriteBatch(); //Instanciando um novo lotes de sprites
+		passaros = new Texture[3]; //Instanciando a quantidade de sprites a ser colocado
+		passaros[0] = new Texture("passaro1.png"); //Imagem do passaro 1
+		passaros[1] = new Texture("passaro2.png"); //Imagem do passaro 2
+		passaros[2] = new Texture("passaro3.png"); //Imagem do passaro 3
+		fundo = new Texture("fundo.png"); //Imagem do pano de fundo
 
-		larguraDispositivo = Gdx.graphics.getWidth();
-		alturaDispositivo = Gdx.graphics.getHeight();
+		larguraDispositivo = Gdx.graphics.getWidth(); //Pegar a largura do pano de fundo
+		alturaDispositivo = Gdx.graphics.getHeight(); //Pegar a altura do pano de fundo
+		posicaoInicialVerticalPassaro = alturaDispositivo / 2; //Fazer a posição inicial ficar entre o centro da tela e não mais na posição 0
 
 	}
 
 	@Override
 	public void render () {
 
-		batch.begin();
+		batch.begin(); //Inici do processo
 
-		batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo);
-		batch.draw(passaro, movimentaX, movimentaY);
+		if(variacao > 3) //Se aa imagens do sprites ultrapassar de três, faz alguma coisa
+			variacao = 0; //A imagem for maior que 3 retorna para zero
+			boolean toqueTela = Gdx.input.justTouched(); //Ao tocar na tela faz algo
+			if(Gdx.input.justTouched()){ //Se ao clicar no touch
+				gravidade = -25; //Faz o passaro flutuar para cima a cada toque na tela
+			}
 
-		movimentaX++;
-		movimentaY++;
-		batch.end();
+			if(posicaoInicialVerticalPassaro > 0 || toqueTela) //Se a posição inicial for maior que zero e tocar na tela
+				posicaoInicialVerticalPassaro = posicaoInicialVerticalPassaro - gravidade; //Faz a posição inicial ao sofrer gravidade, mas ao tocar na tela ele flutua
 
-	}
-	
-	@Override
-	public void dispose () {
+			batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo); //Desenha o fundo da tela
+			batch.draw(passaros[(int) variacao], 30, movimentaX, movimentaY, posicaoInicialVerticalPassaro); //Desenha a posição, a altura e a largura do pássaro
 
-	}
+			variacao += Gdx.graphics.getDeltaTime() * 10; //Suaviza a animação do bater das asas do passaro ao multiplicar por 10
+
+			gravidade++; //Adiciona gravidade
+			movimentaX++; //Adiciona Movimentação do eixo x
+			movimentaY++; //Adiciona Movimentação do eixo y
+			batch.end();
+		}
+
+    @Override
+    public void dispose () {
+
+    }
+
 }
