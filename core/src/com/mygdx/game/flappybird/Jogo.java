@@ -31,8 +31,8 @@ public class Jogo extends ApplicationAdapter {
 		passaros[0] = new Texture("passaro1.png"); //Imagem do passaro 1
 		passaros[1] = new Texture("passaro2.png"); //Imagem do passaro 2
 		passaros[2] = new Texture("passaro3.png"); //Imagem do passaro 3
-		cano = new Texture("cano_topo_maior.png");
-		cano2 = new Texture("cano_baixo_maior.png");
+		cano = new Texture("cano_topo_maior.png"); //Imagem do cano superior
+		cano2 = new Texture("cano_baixo_maior.png"); //Imagem do cano inferior
 		fundo = new Texture("fundo.png"); //Imagem do pano de fundo
 
 		larguraDispositivo = Gdx.graphics.getWidth(); //Pegar a largura do pano de fundo
@@ -59,8 +59,8 @@ public class Jogo extends ApplicationAdapter {
 
 			batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo); //Desenha o fundo da tela
 			batch.draw(passaros[(int) variacao],30, posicaoInicialVerticalPassaro); //Desenha a posição, a altura e a largura do pássaro
-            batch.draw(cano, movimentaX, 1000);
-		    batch.draw(cano2, movimentaX,- 400);
+            batch.draw(cano, movimentaX, 1000); //Cano superior faz o movimento
+		    batch.draw(cano2, movimentaX,- 400); //Cano inferior faz o movimento
 
 			variacao += Gdx.graphics.getDeltaTime() * 10; //Suaviza a animação do bater das asas do passaro ao multiplicar por 10
 
