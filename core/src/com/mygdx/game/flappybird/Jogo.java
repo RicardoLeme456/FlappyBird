@@ -58,7 +58,7 @@ public class Jogo extends ApplicationAdapter {
 				posicaoInicialVerticalPassaro = posicaoInicialVerticalPassaro - gravidade; //Faz a posição inicial ao sofrer gravidade, mas ao tocar na tela ele flutua
 
 			batch.draw(fundo, 0, 0, larguraDispositivo, alturaDispositivo); //Desenha o fundo da tela
-			batch.draw(passaros[(int) variacao],30, posicaoInicialVerticalPassaro); //Desenha a posição, a altura e a largura do pássaro
+			batch.draw(passaros[(int) variacao], 30, posicaoInicialVerticalPassaro); //Desenha a posição, a altura e a largura do pássaro
             batch.draw(cano, movimentaX, 1000); //Cano superior faz o movimento
 		    batch.draw(cano2, movimentaX,- 400); //Cano inferior faz o movimento
 
