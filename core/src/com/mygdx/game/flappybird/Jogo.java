@@ -50,7 +50,7 @@ public class Jogo extends ApplicationAdapter {
 
 	Preferences preferencias;
 
-	private ShapeRenderer shapeRenderer;
+	private ShapeRenderer shapeRenderer; //Renderiza pontos, linhas, contornos e formas a ser preenchida
 	private Circle circuloPassaro; //O raio do passaro
 	private Rectangle retanguloCanoCima; //retangulo a qual o passaro ira bater no topo
 	private Rectangle retanguloCanoBaixo; //retangulo a qual o passaro ira bater na perte de baixo
@@ -87,6 +87,7 @@ public class Jogo extends ApplicationAdapter {
 		textoMelhorPontuacao.setColor(Color.RED); //A cor que vai ser destacado no texto
 		textoMelhorPontuacao.getData().setScale(3); //Aqui voce pega os dados dos pontos e tambem define a escala do texto
 
+		//As Instancias do shape, circulo do passaro, retangulo do cano de cima, retangulo do cano de baixo
 		shapeRenderer = new ShapeRenderer();
 		circuloPassaro = new Circle();
 		retanguloCanoCima = new Rectangle();
@@ -110,7 +111,7 @@ public class Jogo extends ApplicationAdapter {
 		fundo = new Texture("fundo.png"); //Imagem do pano de fundo
 		canoBaixo = new Texture("cano_baixo_maior.png"); //Imagem do cano inferior
 		canoTopo = new Texture("cano_topo_maior.png"); //Imagem do cano superior
-		gameOver = new Texture("game_over.png");
+		gameOver = new Texture("game_over.png"); //A imagem do Game Over
 	}
 
 
@@ -158,6 +159,7 @@ public class Jogo extends ApplicationAdapter {
 			variacao = 0; //A imagem for maior que 3 retorna para zero
 	}
 
+	//Os estados a sofrer mudanças conforme as ações
 	private void verificaEstadoJogo() {
 
 		//Faz a posição inicial ao sofrer gravidade, mas ao tocar na tela ele flutua
@@ -209,13 +211,9 @@ public class Jogo extends ApplicationAdapter {
 				posicaoCanoHorizontal = larguraDispositivo;
 			}
 		}
-
-
-
-
 	}
 
-
+	//O desenho dos sprites que forem implementados no jogo
 	private void desenharTexturas() {
 
 		batch.begin(); //Inicio do processo
